@@ -1,0 +1,124 @@
+{'date': u'MW', 'building': u'MANDE', 'time': u'8:00a-9:20a'}
+
+{'date': u'MW', 'building': u'MANDE', 'time': u'8:00a-9:20a'}
+
+{'date': u'MW', 'building': u'CENTR', 'time': u'8:00a-9:20a'}
+
+{'date': u'TuTh', 'building': u'MANDE', 'time': u'8:00a-9:20a'}
+
+{'date': u'TuTh', 'building': u'MANDE', 'time': u'8:00a-9:20a'}
+
+{'date': u'TuTh', 'building': u'MANDE', 'time': u'8:00a-9:20a'}
+
+{'date': u'MW', 'building': u'MANDE', 'time': u'9:30a-10:50a'}
+
+{'date': u'MW', 'building': u'MANDE', 'time': u'9:30a-10:50a'}
+
+{'date': u'MW', 'building': u'MANDE', 'time': u'9:30a-10:50a'}
+
+{'date': u'MW', 'building': u'MCGIL', 'time': u'9:30a-10:50a'}
+
+{'date': u'TuTh', 'building': u'MANDE', 'time': u'9:30a-10:50a'}
+
+{'date': u'TuTh', 'building': u'MANDE', 'time': u'9:30a-10:50a'}
+
+{'date': u'TuTh', 'building': u'MANDE', 'time': u'9:30a-10:50a'}
+
+{'date': u'TuTh', 'building': u'MCGIL', 'time': u'9:30a-10:50a'}
+
+{'date': u'MW', 'building': u'CENTR', 'time': u'11:00a-12:20p'}
+
+{'date': u'MW', 'building': u'MANDE', 'time': u'11:00a-12:20p'}
+
+{'date': u'MW', 'building': u'MANDE', 'time': u'11:00a-12:20p'}
+
+{'date': u'MW', 'building': u'MCGIL', 'time': u'11:00a-12:20p'}
+
+{'date': u'TuTh', 'building': u'MANDE', 'time': u'11:00a-12:20p'}
+
+{'date': u'TuTh', 'building': u'MANDE', 'time': u'11:00a-12:20p'}
+
+{'date': u'TuTh', 'building': u'MANDE', 'time': u'11:00a-12:20p'}
+
+{'date': u'TuTh', 'building': u'MANDE', 'time': u'12:30p-1:50p'}
+
+{'date': u'TuTh', 'building': u'MANDE', 'time': u'12:30p-1:50p'}
+
+{'date': u'TuTh', 'building': u'MANDE', 'time': u'12:30p-1:50p'}
+
+{'date': u'MW', 'building': u'MANDE', 'time': u'2:00p-3:20p'}
+
+{'date': u'MW', 'building': u'MANDE', 'time': u'2:00p-3:20p'}
+
+{'date': u'MW', 'building': u'MANDE', 'time': u'2:00p-3:20p'}
+
+{'date': u'TuTh', 'building': u'MANDE', 'time': u'2:00p-3:20p'}
+
+{'date': u'TuTh', 'building': u'MANDE', 'time': u'2:00p-3:20p'}
+
+{'date': u'TuTh', 'building': u'MCGIL', 'time': u'2:00p-3:20p'}
+
+{'date': u'MW', 'building': u'MANDE', 'time': u'3:30p-4:50p'}
+
+{'date': u'MW', 'building': u'MANDE', 'time': u'3:30p-4:50p'}
+
+{'date': u'MW', 'building': u'MANDE', 'time': u'3:30p-4:50p'}
+
+{'date': u'TuTh', 'building': u'MANDE', 'time': u'3:30p-4:50p'}
+
+{'date': u'TuTh', 'building': u'MANDE', 'time': u'3:30p-4:50p'}
+
+{'date': u'MW', 'building': u'TBA', 'time': u'2:00p-3:20p'}
+
+{'date': u'TuTh', 'building': u'CENTR', 'time': u'12:30p-1:50p'}
+
+{'date': u'TuTh', 'building': u'CENTR', 'time': u'2:00p-3:20p'}
+
+{'date': u'TuTh', 'building': u'CENTR', 'time': u'9:30a-10:50a'}
+
+{'date': u'MW', 'building': u'MANDE', 'time': u'9:30a-10:50a'}
+
+{'date': u'TuTh', 'building': u'CENTR', 'time': u'9:30a-10:50a'}
+
+{'date': u'TuTh', 'building': u'HSS  ', 'time': u'9:30a-10:50a'}
+
+{'date': u'MW', 'building': u'MANDE', 'time': u'11:00a-12:20p'}
+
+{'date': u'TuTh', 'building': u'CENTR', 'time': u'11:00a-12:20p'}
+
+{'date': u'TuTh', 'building': u'HSS  ', 'time': u'11:00a-12:20p'}
+
+{'date': u'TuTh', 'building': u'CENTR', 'time': u'12:30p-1:50p'}
+
+{'date': u'MW', 'building': u'MANDE', 'time': u'2:00p-3:20p'}
+
+{'date': u'MW', 'building': u'MANDE', 'time': u'3:30p-4:50p'}
+
+{'date': u'TuTh', 'building': u'MANDE', 'time': u'9:30a-10:50a'}
+
+{'date': u'TuTh', 'building': u'MANDE', 'time': u'11:00a-12:20p'}
+
+{'date': u'TuTh', 'building': u'MANDE', 'time': u'12:30p-1:50p'}
+
+{'date': u'MW', 'building': u'MANDE', 'time': u'5:00p-6:20p'}
+
+{'date': u'TuTh', 'building': u'TBA', 'time': u'12:30p-1:50p'}
+
+{'date': u'TuTh', 'building': u'TBA', 'time': u'11:00a-12:20p'}
+
+{'date': u'MW', 'building': u'HSS  ', 'time': u'8:00a-9:20a'}
+
+{'date': u'MW', 'building': u'HSS  ', 'time': u'3:30p-4:50p'}
+
+{'date': u'MW', 'building': u'MANDE', 'time': u'5:00p-6:20p'}
+
+{'date': u'TuTh', 'building': u'CENTR', 'time': u'9:30a-10:50a'}
+
+{'date': u'TuTh', 'building': u'CENTR', 'time': u'11:00a-12:20p'}
+
+{'date': u'TuTh', 'building': u'TBA', 'time': u'9:30a-10:50a'}
+
+{'date': u'MW', 'building': u'TBA', 'time': u'11:00a-11:50a'}
+
+{'date': u'W', 'building': u'TBA', 'time': u'12:30p-3:20p'}
+
