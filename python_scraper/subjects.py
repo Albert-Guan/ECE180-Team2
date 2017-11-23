@@ -6,13 +6,25 @@
 import requests
 import json
 
-endpoint = "https://act.ucsd.edu/scheduleOfClasses/subject-list.json?selectedTerm="
+subj_endpoint = "https://act.ucsd.edu/scheduleOfClasses/subject-list.json?selectedTerm="
+dept_endpoint = "https://act.ucsd.edu/scheduleOfClasses/department-list.json?selectedTerm="
+
+def checkQuat(quarter):
+	assert isinstance(quarter, str); # quarter should be string
 
 def getSubjects(quarter):
-	assert isinstance(quarter, str);
-	response = requests.get(endpoint+quarter);
+	checkQuat(quarter)
+	response = requests.get(subj_endpoint+quarter);
 	return [subject["code"] for subject in json.loads(response.content)];
+
+def getDepartments(quarter):
+	checkQuat(quarter)
+	response = requests.get(dept_endpoint+quarter);
+	return [dept["code"] for dept in json.loads(response.content)];
 
 '''
 	Test
 '''
+quarter = "FA17"
+print getSubjects(quarter);
+print getDepartments(quarter);
