@@ -1,3 +1,1 @@
-{'selectedSubjects': ['ECE '], 'selectedTerm': 'FA16'}: 3exceptions: ('Connection broken: error("(54, \'ECONNRESET\')",)', error("(54, 'ECONNRESET')",))
-{'selectedSubjects': ['LAWS'], 'selectedTerm': 'FA16'}: 1exceptions: ('Connection broken: error("(54, \'ECONNRESET\')",)', error("(54, 'ECONNRESET')",))
-{'selectedSubjects': ['TDAC'], 'selectedTerm': 'FA16'}: 2exceptions: ('Connection broken: error("(54, \'ECONNRESET\')",)', error("(54, 'ECONNRESET')",))
+{'selectedSubjects': ['SPPS'], 'selectedTerm': 'SP17'}: 10exceptions: HTTPSConnectionPool(host='act.ucsd.edu', port=443): Max retries exceeded with url: /scheduleOfClasses/scheduleOfClassesStudentResult.htm?page=10 (Caused by NewConnectionError('<requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x10bccf8d0>: Failed to establish a new connection: [Errno 60] Operation timed out',))

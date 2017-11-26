@@ -109,12 +109,13 @@ def scrapeByTermAndSubject(term, subject, pageNum):
 	save to file res.txt
 '''
 filename = "res.txt";
-terms = ["FA16","WI17","SP17","S117","S217","S317","SU17","SA17"]
+terms = ["FA16","WI17","SP17","S117","S217","S317","SU17","SA17","FA17"]
+directory = "./classData/"
 # terms = ["FA17"];
 testSubjects = ["CSE"];
 
 for term in terms:
-	filename = term+".txt";
+	filename = directory+term+".txt";
 	nextSubject = False;
 	with open(filename, "w") as f:
 		for subject in getSubjects(term):
