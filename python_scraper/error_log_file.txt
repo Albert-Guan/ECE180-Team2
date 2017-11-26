@@ -1,0 +1,3 @@
+{'selectedSubjects': ['ECE '], 'selectedTerm': 'FA16'}: 3exceptions: ('Connection broken: error("(54, \'ECONNRESET\')",)', error("(54, 'ECONNRESET')",))
+{'selectedSubjects': ['LAWS'], 'selectedTerm': 'FA16'}: 1exceptions: ('Connection broken: error("(54, \'ECONNRESET\')",)', error("(54, 'ECONNRESET')",))
+{'selectedSubjects': ['TDAC'], 'selectedTerm': 'FA16'}: 2exceptions: ('Connection broken: error("(54, \'ECONNRESET\')",)', error("(54, 'ECONNRESET')",))

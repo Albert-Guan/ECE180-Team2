@@ -12,7 +12,7 @@ filename2 = "res.txt"
 with open(filename2, "w") as f:
 	f.close();
 
-for i in range(1,9):
+for i in range(10,11):
 	print i;
 	url = "https://act.ucsd.edu/scheduleOfClasses/scheduleOfClassesStudentResult.htm?page="+str(i);
 
@@ -50,19 +50,32 @@ for i in range(1,9):
 
 	soup = BeautifulSoup(open(filename,"r"),"lxml");
 
-	res = [{"date": tag.contents[11].string.strip(), 
-		 	"time": tag.contents[13].string, 
-		 	"building": tag.contents[15].string} 
-		 	for tag in soup.find_all(attrs = {"class": "sectxt"}) 
-		 	if (len(tag.find_all(attrs = {"class": "ertext"})) == 0 or tag.find_all(attrs = {"class": "ertext"})[0].string != "Cancelled")]
-
-	# res = [ tag.contents
+	# res = [{"date": tag.contents[11].string.strip(), 
+	# 	 	"time": tag.contents[13].string, 
+	# 	 	"building": tag.contents[15].string} 
 	# 	 	for tag in soup.find_all(attrs = {"class": "sectxt"}) 
-	# 	 	]
+	# 	 	if (len(tag.find_all(attrs = {"class": "ertext"})) == 0 or tag.find_all(attrs = {"class": "ertext"})[0].string != "Cancelled")]
 
+	def clean(contents):
+		return [content.strip() if isinstance(content, str) else content.string.strip() for content in [content for content in contents if isinstance(content,str) or content.string != None]];
+
+
+	res = [ clean(tag.contents)
+		 	for tag in soup.find_all(attrs = {"class": "sectxt"}) 
+		 	]
+
+	res2 = [tag.contents for i,tag in enumerate(soup.find_all(attrs = {"class" : "crsheader"})) if i % 4 == 1]
+
+	soup2 = soup.find_all(attrs = {"class" : "tbrdr"})[0];
+	
 	with open(filename2,"a") as f:
-		for d in res:
-			f.write(str(d)+"\n\n");
+		for d in soup2.find_all('tr'):
+			if d.has_attr("class"):
+				print str(d.contents) + "\n";
+			else:
+				for i,tag in enumerate(d.find_all(attrs = {"class" : "crsheader"})):
+					if i % 4 == 1:
+						print tag.contents;
 		f.close();
 
 

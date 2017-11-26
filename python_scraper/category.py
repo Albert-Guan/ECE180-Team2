@@ -26,5 +26,5 @@ def getDepartments(quarter):
 	Test
 '''
 quarter = "FA17"
-print getSubjects(quarter);
-print getDepartments(quarter);
+getSubjects(quarter);
+getDepartments(quarter);
