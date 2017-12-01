@@ -26,7 +26,6 @@ for key in loaded_json.keys():
 
 # make use of the information above, do where ever you want:
 # for example, if you want to get the statics for different subject
-
 subjects_num_student = defaultdict(lambda : 0);
 
 for key in loaded_json.keys():
