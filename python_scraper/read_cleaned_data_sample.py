@@ -11,7 +11,7 @@ directory = "./classData/"
 loaded_json = json.loads(open(directory+term+"-cleaned.json").readline());
 
 for key in loaded_json.keys():
-	print "courseNum:" + key;
+	# print "courseNum:" + key;
 	for line in loaded_json[key]:
 		# line is a list of length 8, all elements are string
 		# index 0 -> section number: some may not have(like some lectures)
@@ -22,14 +22,15 @@ for key in loaded_json.keys():
 		# index 5 -> building (APM,YORK,...)
 		# index 6 -> room number
 		# index 7 -> number of students(12, 34 ....)
-		print line;
+		# print line;
+		len(line)
 
 # make use of the information above, do where ever you want:
 # for example, if you want to get the statics for different subject
 subjects_num_student = defaultdict(lambda : 0);
 
 for key in loaded_json.keys():
-	print "courseNum:" + key;
+	# print "courseNum:" + key;
 	subj = key.split("-")[0];
 	num = 0;
 	for line in loaded_json[key]:
@@ -46,5 +47,11 @@ for key in loaded_json.keys():
 	subjects_num_student[subj] = num;
 
 # print the result:
-for key in subjects_num_student:
-	print "number of students for subj: " + key + " is: " + str(subjects_num_student[key]);
+# for key in subjects_num_student:
+# 	print "number of students for subj: " + key + " is: " + str(subjects_num_student[key]);
+
+def getDays(days):
+	assert isinstance(days, str);
+	import re;
+	pattern = re.compile("^M|W|F|Th|Tu");
+	return re.findall(pattern, days);

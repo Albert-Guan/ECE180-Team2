@@ -1,5 +1,5 @@
 import json
-attributes = "CourseNum, SectionID, ClassType, Section, Day, Time, Building, Room, StudentsNumber"
+attributes = "CourseNum,SectionID,ClassType,Section,Day,Time,Building,Room,StudentsNumber"
 terms = ["FA16","WI17","SP17","S117","S217","S317","SU17","SA17","FA17"]
 directory = "./classData/"
 csv_directory = "./csvData/"
@@ -12,7 +12,7 @@ def convertToCSV(term):
 			for line in loaded_json[key]:
 				lineCSV = str(key);
 				for ele in line:
-					lineCSV += ", " + ele;
+					lineCSV += "," + ele;
 				f.write(lineCSV + "\n");
 
 # convert all json file to csv file
