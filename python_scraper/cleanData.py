@@ -46,9 +46,13 @@ for term in terms:
 			# get class info
 			elif '[' in line:
 				lines = ast.literal_eval(line);
+
+				# do statistics for course type:
 				if (len(lines) > 10):
-					courseType_num[lines[4]] += 1;
-					courseType_num[lines[6]] += 1;
+					if (lines[4] != "" and not lines[4][0].isdigit() and not lines[4][-1].isdigit()):
+						courseType_num[lines[4]] += 1;
+					if (lines[6] != "" and not lines[6][0].isdigit() and not lines[6][-1].isdigit()):
+						courseType_num[lines[6]] += 1;
 				# remove classes without location
 				if (len(lines) < 10) or not ("LA" in lines or "DI" in lines or "LE" in lines or "SE" in lines or "TU" in lines):
 					continue;
@@ -71,7 +75,8 @@ def clean(term):
 	loaded_json = json.loads(open(directory+term+".json").readline());
 	cleaned_json = defaultdict(list);
 	for key in loaded_json.keys():
-		print key + ": "
+		# uncomment for debug
+		# print key + ": "
 		num_student = defaultdict(lambda:0);
 		num_classes = defaultdict(lambda:0);
 		for line in loaded_json[key]:
@@ -106,7 +111,7 @@ def clean(term):
 			# make sure each line ends with a digit
 			assert line[-1].isdigit()
 			newLine = line[:7] + [(str(num_students(line)))];
-			print newLine
+			# print newLine
 			cleaned_json[key].append(newLine);
 
 	with open(directory+term+"-cleaned.json","w") as f:
@@ -119,3 +124,50 @@ for term in terms:
 
 print "All data have been cleaned"
 
+import numpy as np
+import matplotlib.pyplot as plt;  plt.rcdefaults();
+import matplotlib.pyplot as plt;
+
+print "Show the number of classes for different course type: "
+
+f = plt.figure(1);
+courseType_num_tuples = [];
+for key in courseType_num:
+	if key == "PB":
+		courseType_num_tuples.append((key, courseType_num[key] / 12));
+	elif key == "RE":
+		courseType_num_tuples.append((key, courseType_num[key] / 4));
+	else:
+		courseType_num_tuples.append((key, courseType_num[key]));
+
+sorted_tuples = sorted(courseType_num_tuples, key = lambda tup : tup[1]);
+courseTypes = tuple([ct[0] for ct in sorted_tuples]);
+# print courseTypes
+courseNum = [ct[1] for ct in sorted_tuples];
+
+# Draw the bar chart for classes for different type of classes
+y_pos = np.arange(len(courseTypes));
+plt.bar(y_pos, courseNum, align = 'center', alpha = 0.5);
+plt.xticks(y_pos, courseTypes);
+plt.title("Occurances of different class types")
+plt.ylabel("Occurances")
+plt.xlabel("class types")
+f.show();
+
+# Draw the pie chart for classes for different type of classes
+g = plt.figure(2);
+courseType_num_pie = defaultdict(lambda : 0);
+for key in courseType_num:
+	if key in set(["DI","LE","LA","SE","TU"]):
+		courseType_num_pie[key] = courseType_num[key];
+	else:
+		courseType_num_pie["Others"] += courseType_num[key];
+courseType_num_pie_tuples = [(key, courseType_num_pie[key]) for key in courseType_num_pie];
+courseType_num_tuples = sorted(courseType_num_pie_tuples, key = lambda tup : tup[1]);
+courseType_num_pie = [ct[1] for ct in courseType_num_pie_tuples];
+course_types_pie = [ct[0] for ct in courseType_num_pie_tuples];
+plt.pie(courseType_num_pie, labels=course_types_pie,
+        autopct='%1.1f%%', shadow=True, startangle=90);
+plt.title("Occurances percentage chart")
+g.show();
+raw_input();
