@@ -10,7 +10,37 @@ subject = None;
 lenSet = set();
 json_data = defaultdict(list);
 
+'''
+	All input check functions
+'''
+def check_line_str(line):
+	assert isinstance(line, str);
+
+def check_line_list(line):
+	assert isinstance(line, list);
+
+def check_term(term):
+	assert isinstance(term, str);
+
+'''
+	Main functions
+'''
 def clean_single_line(line):
+	'''
+		Leave valid information for a single class line:
+			# index 0 -> course number
+			# index 1 -> section number: some may not have(like some lectures)
+			# index 2 -> class type ("LE","LA","DI","SE"...)
+			# index 3 -> section (A01, A02 ...)
+			# index 4 -> day (Mo, Tu, Wed...)
+			# index 5 -> time period (10.00a - 10:50a)
+			# index 6 -> building (APM,YORK,...)
+			# index 7 -> room number
+			# index 8 -> number of students(12, 34 ....)
+		@parameters: line: string separating lines by ","
+		@return:	 list containing the valid information
+	'''
+	check_line_str(line);
 	lineList = ast.literal_eval(line);
 	if len(lineList) == 20 or len(lineList) == 19:
 		return ["",lineList[4],lineList[6],lineList[8],lineList[10],lineList[12],lineList[14],lineList[16],lineList[18]];
@@ -18,13 +48,20 @@ def clean_single_line(line):
 		return [lineList[4],lineList[6],lineList[8],lineList[10],lineList[12],lineList[14],lineList[16],lineList[-5],lineList[-3]];
 
 def num_students(line):
+	'''
+		Calculate the number of students for a class line. 
+		The last element means number of seats
+		The last second element means available seats or full if it is empty string
+		@parameters: line: list contain valid information
+		@return:	 number of students for this line
+	'''
 	if line[-2] == '':
 		return int(line[-1]);
 	return int(line[-1]) - int(line[-2]);
 
 # statistic the number of different type of classes
 # such as "LE", "DI" and so on
-courseType_num = defaultdict(lambda:0);
+courseType_num = defaultdict(lambda : 0);
 
 # from transfer all data from .txt file to json file
 for term in terms:
@@ -46,7 +83,6 @@ for term in terms:
 			# get class info
 			elif '[' in line:
 				lines = ast.literal_eval(line);
-
 				# do statistics for course type:
 				if (len(lines) > 10):
 					if (lines[4] != "" and not lines[4][0].isdigit() and not lines[4][-1].isdigit()):
@@ -71,17 +107,23 @@ for term in terms:
 
 
 def clean(term):
+	'''
+		Fill empty student number for some classes
+		@parameters: term: string representing term
+		@return:	 None
+	'''
 	# get json string from file and transform to dictionary
 	loaded_json = json.loads(open(directory+term+".json").readline());
 	cleaned_json = defaultdict(list);
 	for key in loaded_json.keys():
-		# uncomment for debug
+		### Uncomment for debugging ###
 		# print key + ": "
 		num_student = defaultdict(lambda:0);
 		num_classes = defaultdict(lambda:0);
 		for line in loaded_json[key]:
 			if (line[1] == "SE" or line[1] == "TU") and line[-1] == '':
 				line[-1] = str(0);
+			### Uncomment for debugging ###
 			# print line
 			if line[1] == "LA":
 				num_classes["LA"] += 1;
@@ -107,10 +149,12 @@ def clean(term):
 				line[-1] = str(max_num_students / num_classes["LA"]);
 
 		for line in loaded_json[key]:
-			# print line; # used for debug
+			### Uncomment for debugging ###
+			# print line;
 			# make sure each line ends with a digit
 			assert line[-1].isdigit()
 			newLine = line[:7] + [(str(num_students(line)))];
+			### Uncomment for debugging ###
 			# print newLine
 			cleaned_json[key].append(newLine);
 
@@ -119,22 +163,25 @@ def clean(term):
 		f.write(json_str);
 		print term+".json has been cleaned!!!"
 
+# clean the data for all terms
 for term in terms:
 	clean(term);
 
 print "All data have been cleaned"
 
+# plot the graph for class type statistics
 import numpy as np
 import matplotlib.pyplot as plt;  plt.rcdefaults();
 import matplotlib.pyplot as plt;
-
 print "Show the number of classes for different course type: "
 
 f = plt.figure(1);
 courseType_num_tuples = [];
 for key in courseType_num:
+	# PB is listed based on one week. So it should be divided by 12
 	if key == "PB":
 		courseType_num_tuples.append((key, courseType_num[key] / 12));
+	# Same as PB, while average occurs 3 times for a term
 	elif key == "RE":
 		courseType_num_tuples.append((key, courseType_num[key] / 4));
 	else:
@@ -142,6 +189,7 @@ for key in courseType_num:
 
 sorted_tuples = sorted(courseType_num_tuples, key = lambda tup : tup[1]);
 courseTypes = tuple([ct[0] for ct in sorted_tuples]);
+### Uncomment for debugging ###
 # print courseTypes
 courseNum = [ct[1] for ct in sorted_tuples];
 

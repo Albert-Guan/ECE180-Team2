@@ -105,27 +105,56 @@ building_locations = {
 	'CTF'	: (32.756219, -117.165294)
 }
 
+'''
+	All input check functions
+'''
+def checkLi(li):
+	assert isinstance(li, list);
+
+def checkTime(time):
+	assert isinstance(time, str);
+
+def checkTimePeriod(time_period):
+	assert isinstance(time_period, int);
+
+def checkTerm(term):
+	assert isinstance(term, str);
+
 def convertListToCSV(li):
 	'''
-		convert a list to csv form
+		Convert a list to csv line
+		@parameters: li: list of items
+		@return:	 csv form of the list items
 	'''
-	assert isinstance(li, list);
+	checkLi(li);
 	res = "";
 	for ele in li:
 		res += str(ele) + ","
 	return res[:-1];
 
 def getDateTime(time):
-	assert isinstance(time, str);
+	'''
+		Convert time string("HH:MMa\p") to a datetime object (a\p means am or pm)
+		@parameters: time: string represention of time ("HH:MMa\p")
+		@return:	 datetime object with time converted by the input time
+	'''
+	checkTime(time);
 	res = datetime.datetime(*([1990] + [1] * 6));
 	curr = datetime.datetime.strptime(time[:-1], '%H:%M').time();
+	# convert pm time to 24 hours
 	if time[-1] == 'p' and time[:2] != "12":
 		curr = datetime.time(curr.hour + 12, curr.minute);
 	return res.replace(hour = curr.hour, minute = curr.minute);
 		 
 def convertTimeToList(time, period_minutes = 10):
-	assert isinstance(time, str);
-	assert isinstance(period_minutes, int);
+	'''
+		Convert time period to a list of time with period of 10 minutes
+		@parameters: time: time period represented by "HH:MMa\p-HH:MMa\p"
+		@return:	 datetime object with time converted by the input time
+	'''
+	checkTime(time);
+	checkTimePeriod(period_minutes);
+	### Uncomment for debugging ###
 	# print time;
 	start = time.split("-")[0];
 	end = time.split("-")[1];
@@ -138,12 +167,18 @@ def convertTimeToList(time, period_minutes = 10):
 	return res;
 
 def convertToGeoSpatialData(term):
-	assert isinstance(term, str);
+	'''
+		Aggregate data to be csv file which will be used to 
+		draw geo spatial data
+		@parameter:	term: string representing term
+		@return:	None
+	'''
+	checkTerm(term);
 	filename = foldername+term+"-cleaned.csv";
 	tempfile = open(temp_filename, "w");
 	rooms_num = defaultdict(lambda : 0);
 	with open(filename, "r") as f:
-		# print f.readline();
+		f.readline();
 		for line in f:
 			# separate it by day:
 			element_list = line.split(",");
@@ -166,11 +201,13 @@ def convertToGeoSpatialData(term):
 	for key in building_num:
 		line = [key[0],str(building_locations[key[0]][0]),str(building_locations[key[0]][1])
 				,str(key[1]),str(key[2]),str(building_num[key])]
+		### Uncomment for debugging ###
 		# print line;
 		resfile.write(convertListToCSV(line)+"\n");
 	resfile.close();
 	print term + "'s data has been converted to geo data!"
 
+# convert all data so that can be used to draw geo spatial
 for term in terms:
 	convertToGeoSpatialData(term);
 print "Done."

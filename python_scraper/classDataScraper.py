@@ -11,11 +11,6 @@ import lxml.html as lh
 
 endpoint_url = "https://act.ucsd.edu/scheduleOfClasses/scheduleOfClassesStudentResult.htm?page=";
 error_log_file = "error_log_file.txt";
-# empty = "";
-# term = "FA17";
-# subjects = ["AWP"];
-# false = "false";
-# true = "true";
 
 '''
 	All parameters check functions
@@ -39,11 +34,13 @@ def checkFormData(form_data):
 def checkContents(contents):
 	assert isinstance(contents, list);
 
-'''
-	clean the None value and prevailing and ending space
-'''
 def clean(contents):
-	
+	'''
+		Remove the None value and 
+		remove prevailing and ending space for a string
+		@parameters: contents: content list
+		@return:	 cleaned string list	
+	'''
 	checkContents(contents);
 	return [str(content.strip()) if isinstance(content, str) else str(content.string.strip()) for content in [content for content in contents if isinstance(content,str) or content.string != None]];
 
@@ -51,21 +48,31 @@ def clean(contents):
 	data scraper functions
 '''
 def isValid(contents):
+	'''
+		Check if contents contain "Cancelled" or "TBA" or "FI"
+		@parameters: contents: content list
+		@return:	 cleaned content list	
+	'''
 	checkContents(contents);
 	cleanedContents = set(clean(contents));
 	return not ("Cancelled" in cleanedContents or "TBA" in cleanedContents or "FI" in cleanedContents);
 
 def scrapeClassData(pageNum, form_data):
+	'''
+		Scrape data with page number and query input
+		@parameters: pageNum: number of page for a certian query input
+					 form_data: dictionary containing the query requirement
+		@return:	 query result in form of string
+	'''	
 	checkPageNum(pageNum);
 	checkFormData(form_data);
-
 	res = [];
-
+	# try the query
 	try:
 		url = endpoint_url + str(pageNum);
 		reponse = requests.post(url, data = form_data);
+		# create beatysoup tree by the retrieving stream
 		soup = BeautifulSoup(reponse.content,"lxml").find(attrs = {"class" : "tbrdr"});
-		
 		if soup == None:
 			return None;
 		else:
@@ -92,15 +99,24 @@ def scrapeClassData(pageNum, form_data):
 	scape data by subject
 '''
 def scrapeByTermAndSubject(term, subject, pageNum):
+	'''
+		Scrape the data by term and subject
+		@parameters: term: string representing the term
+					 subject: string representing subject
+					 pageNum: int representing pageNum
+		@return:	 result of scraping	
+	'''
 	checkTerm(term);
 	checkSubj(subject);
 	checkPageNum(pageNum);
 
+	# construct the query data
 	form_data = {
 		"selectedTerm": term,
 		"selectedSubjects": [subject]
 	}
 
+	# get the result in form of list
 	res = scrapeClassData(pageNum, form_data)
 	return res;
 

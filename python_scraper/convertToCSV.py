@@ -4,7 +4,19 @@ terms = ["FA16","WI17","SP17","S117","S217","S317","SU17","SA17","FA17"]
 directory = "./classData/"
 csv_directory = "./csvData/"
 
+'''
+	All input check functions
+'''
+def checkTerm(term):
+	assert isinstance(term, str);
+
 def convertToCSV(term):
+	'''
+		Convert Json data to csv form
+		@parameter: term: string representing term
+		@return:	None
+	'''
+	checkTerm(term);
 	loaded_json = json.loads(open(directory+term+"-cleaned.json").readline());
 	with open(csv_directory+term+"-cleaned.csv", "w") as f:
 		f.write(attributes + "\n");
