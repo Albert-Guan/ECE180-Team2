@@ -188,6 +188,7 @@ for key in courseType_num:
 		courseType_num_tuples.append((key, courseType_num[key]));
 
 sorted_tuples = sorted(courseType_num_tuples, key = lambda tup : tup[1]);
+print sorted_tuples;
 courseTypes = tuple([ct[0] for ct in sorted_tuples]);
 ### Uncomment for debugging ###
 # print courseTypes
@@ -197,7 +198,7 @@ courseNum = [ct[1] for ct in sorted_tuples];
 y_pos = np.arange(len(courseTypes));
 plt.bar(y_pos, courseNum, align = 'center', alpha = 0.5);
 plt.xticks(y_pos, courseTypes);
-plt.title("Occurances of different class types")
+plt.title("Occurences of different class types")
 plt.ylabel("Occurances")
 plt.xlabel("class types")
 f.show();
@@ -208,14 +209,19 @@ courseType_num_pie = defaultdict(lambda : 0);
 for key in courseType_num:
 	if key in set(["DI","LE","LA","SE","TU"]):
 		courseType_num_pie[key] = courseType_num[key];
+	elif key == "PB":
+		courseType_num_pie["Others"] += courseType_num[key] / 12;
+	elif key == "RE":
+		courseType_num_pie["Others"] += courseType_num[key] / 4;
 	else:
 		courseType_num_pie["Others"] += courseType_num[key];
 courseType_num_pie_tuples = [(key, courseType_num_pie[key]) for key in courseType_num_pie];
 courseType_num_tuples = sorted(courseType_num_pie_tuples, key = lambda tup : tup[1]);
+print courseType_num_pie;
 courseType_num_pie = [ct[1] for ct in courseType_num_pie_tuples];
 course_types_pie = [ct[0] for ct in courseType_num_pie_tuples];
 plt.pie(courseType_num_pie, labels=course_types_pie,
         autopct='%1.1f%%', shadow=True, startangle=90);
-plt.title("Occurances percentage chart")
+plt.title("Occurences percentage chart")
 g.show();
 raw_input();
